@@ -1,13 +1,11 @@
-interface Header {
-  genre: {
-    title: string;
-  };
+interface HeaderProps {
+  title: string;
 }
-export function Header(props: Header) {
+export function Header({ title }: HeaderProps) {
   return (
     <header>
       <span className="category">
-        Categoria:<span> {props.genre.title}</span>
+        Categoria:<span> {title}</span>
       </span>
     </header>
   );

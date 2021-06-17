@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { Button } from "./components/Button";
+import { MovieCard } from "./components/MovieCard";
+
 import { SideBar } from "./components/SideBar";
 import { Content } from "./components/Content";
+import { Header } from "./components/Header";
+
 import { api } from "./services/api";
 
 import "./styles/global.scss";
@@ -10,13 +14,13 @@ import "./styles/global.scss";
 import "./styles/sidebar.scss";
 import "./styles/content.scss";
 
-export interface GenreResponseProps {
+interface GenreResponseProps {
   id: number;
   name: "action" | "comedy" | "documentary" | "drama" | "horror" | "family";
   title: string;
 }
 
-export interface MovieProps {
+interface MovieProps {
   imdbID: string;
   Title: string;
   Poster: string;
@@ -64,10 +68,14 @@ export function App() {
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <SideBar
-        data={{ genres: genres, selectedGenreId: selectedGenreId }}
-        handleClickButton={(id) => handleClickButton(id)}
+        genres={genres}
+        handleClickButton={handleClickButton}
+        selectedGenreId={selectedGenreId}
       />
-      <Content content={{ title: selectedGenre.title, movies: movies }} />
+      <div className="container">
+        <Header title={selectedGenre.title} />
+        <Content movies={movies} />
+      </div>
     </div>
   );
 }
